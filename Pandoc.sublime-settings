@@ -1,0 +1,48 @@
+{
+  "user": {
+    "pandoc-path": "/usr/local/bin/pandoc",
+    
+    "transformations": {
+      // note these are examples of output formats that should not be opened in a
+      // sublime text buffer. See "pandoc-format-file" below
+      // @see http://johnmacfarlane.net/pandoc/README.html#creating-a-pdf
+      "PDF": {
+        "scope": {
+          "text.html": "html",
+          "text.html.markdown": "markdown"
+        },
+        "pandoc-arguments": [
+          "-s", "--toc", "--number-sections",
+          "--variable", "geometry:margin=1.25in",
+          "-t", "pdf",
+          "--latex-engine=/Library/TeX/texbin/pdflatex",
+          "--filter=/usr/local/bin/pandoc-citeproc",
+          "--bibliography=/Users/Cody_2/git.repos/references/test2.bib"
+        ],
+      },
+
+      "Microsoft Word": {
+        "scope": {
+          "text.html": "html",
+          "text.html.markdown": "markdown"
+        },
+        "pandoc-arguments": [
+          "-t", "docx", 
+          "--filter=/usr/local/bin/pandoc-citeproc",
+          "--bibliography=/Users/Cody_2/git.repos/references/test2.bib"
+          // if -o or --output missing, will write to a temporary file
+          // "--output=~/Downloads/output.pdf"
+        ]
+      }
+
+    },
+
+    // these should not need to be customized
+
+    // output formats that are written to file, using -o parameter. These we do
+    // not output to a sublime text buffer.
+    "pandoc-format-file": ["docx", "epub", "pdf", "odt"]
+
+  }
+
+}
